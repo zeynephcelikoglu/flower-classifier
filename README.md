@@ -127,6 +127,17 @@ The project uses the [Flowers Dataset](https://www.kaggle.com/datasets/imsparsh/
 - Output size: 5 (number of classes)
 - Training time: ~151 minutes
 
+### Trained Model Files (Download Links)
+
+You can download the trained weights for each model from the links below:
+
+- [Custom CNN (Model 1)](https://drive.google.com/file/d/1pwxMXF-aGFcn3mUDfKefwnTyOdCQTlcQ/view?usp=sharing)
+- [VGG16 Feature Extractor (Model 2)](https://drive.google.com/file/d/12AkCp_SdiMz5JjVk1KBJn45oopwysoE7/view?usp=sharing)
+- [VGG16 Fine-Tuned (Model 3)](https://drive.google.com/file/d/1jWbGSi7_7Bd2ml6tvXaLNbHRjzyHpk_B/view?usp=sharing)
+- [Best Performing Model (`best_model.pth` from Model 3)](https://drive.google.com/file/d/1ePmaNHpcxm9itJoY_BKc7TwigLJGBXFl/view?usp=sharing)
+
+> Place the downloaded `.pth` files in the `results/` directory if you wish to reuse them for evaluation or visualization.
+
 ## Data Augmentation
 
 The training data is augmented using:
