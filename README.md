@@ -1,9 +1,23 @@
 # Flower Classification with Deep Learning
 
-This project implements a multi-class image classification system for flower images using deep learning techniques. The system includes three different models:
-1. A custom CNN architecture
-2. VGG16 as a feature extractor
-3. Fine-tuned VGG16
+## Overview
+
+This project implements a deep learning-based flower classification system using PyTorch. It explores three modeling strategies: a custom CNN built from scratch, transfer learning with VGG16 as a feature extractor, and a fine-tuned VGG16 model. Performance is evaluated using standard classification metrics, and intermediate convolutional features are visualized for interpretability.
+
+## How to Run
+
+1. Set up the environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+2. Place the dataset in `data/train/`.
+3. Train a model:
+   ```bash
+   python src/main.py --model vgg16_finetune --epochs 35 --batch_size 32 --learning_rate 0.001
+   ```
+4. Results and visualizations will be generated in the `results/` directory.
 
 ## Project Structure
 
@@ -43,34 +57,6 @@ To install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-
-## Training Procedure
-
-1. Place the dataset in `data/train/` as described below.
-2. Select the model: `custom_cnn`, `vgg16_feature`, or `vgg16_finetune`.
-3. Set training parameters (epochs, batch size, learning rate).
-4. Run the following command:
-   ```bash
-   python src/main.py --model [custom_cnn|vgg16_feature|vgg16_finetune] --epochs 20 --batch_size 32 --learning_rate 0.001
-   ```
-   - For Model 3 (VGG16 Fine-tuned), epochs will be set to 35 automatically.
-5. All metrics, visualizations, and models are saved in the `results/` directory.
-
-## How to Run
-
-1. Set up the environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
-2. Place the dataset in `data/train/`.
-3. Train a model:
-   ```bash
-   python src/main.py --model vgg16_finetune --epochs 35 --batch_size 32 --learning_rate 0.001
-   ```
-4. Results and visualizations will be generated in the `results/` directory.
-
 ## Dataset
 
 The project uses the [Flowers Dataset](https://www.kaggle.com/datasets/imsparsh/flowers-dataset/data) from Kaggle, which contains five categories of flowers:
@@ -97,6 +83,27 @@ The project uses the [Flowers Dataset](https://www.kaggle.com/datasets/imsparsh/
    ```
 5. Note: The dataset does not provide a labeled test set. All model evaluation and comparison is performed on a validation set automatically split from the training data.
 
+## Data Augmentation
+
+The training data is augmented using:
+- Random resized crop (224x224)
+- Random horizontal flip
+- Random rotation (±10 degrees)
+- Color jittering (brightness, contrast, saturation)
+- Normalization (ImageNet stats)
+
+## Training Procedure
+
+1. Place the dataset in `data/train/` as described below.
+2. Select the model: `custom_cnn`, `vgg16_feature`, or `vgg16_finetune`.
+3. Set training parameters (epochs, batch size, learning rate).
+4. Run the following command:
+   ```bash
+   python src/main.py --model [custom_cnn|vgg16_feature|vgg16_finetune] --epochs 20 --batch_size 32 --learning_rate 0.001
+   ```
+   - For Model 3 (VGG16 Fine-tuned), epochs will be set to 35 automatically.
+5. All metrics, visualizations, and models are saved in the `results/` directory.
+
 ## Model Architectures
 
 ### Custom CNN (Model 1)
@@ -106,6 +113,21 @@ The project uses the [Flowers Dataset](https://www.kaggle.com/datasets/imsparsh/
 - Output size: 5 (number of classes)
 - Training time: ~99 minutes
 
+#### Feature Visualization (Custom CNN)
+Visualizations are created using activation maps from selected convolutional layers to better understand what spatial patterns the model is focusing on, inspired by Zeiler & Fergus (2014).
+
+**Conv Layer 1 Features**
+![Conv1](results/custom_cnn_conv1_features.png)
+
+**Conv Layer 3 Features**
+![Conv3](results/custom_cnn_conv3_features.png)
+
+**Conv Layer 5 Features**
+![Conv5](results/custom_cnn_conv5_features.png)
+
+**Training History**
+![Custom CNN Training History](results/custom_cnn_history.png)
+
 ### VGG16 Feature Extractor (Model 2)
 - Uses pretrained VGG16 as feature extractor
 - Freezes all VGG16 layers
@@ -113,6 +135,9 @@ The project uses the [Flowers Dataset](https://www.kaggle.com/datasets/imsparsh/
 - Input size: 224x224x3
 - Output size: 5 (number of classes)
 - Training time: ~71 minutes
+
+**Training History**
+![VGG16 Feature Extractor Training History](results/vgg16_feature_history.png)
 
 ### Fine-tuned VGG16 (Model 3)
 - Uses pretrained VGG16
@@ -127,6 +152,21 @@ The project uses the [Flowers Dataset](https://www.kaggle.com/datasets/imsparsh/
 - Output size: 5 (number of classes)
 - Training time: ~151 minutes
 
+#### Feature Visualization (Fine-tuned VGG16)
+Visualizations are created using activation maps from selected convolutional layers to better understand what spatial patterns the model is focusing on, inspired by Zeiler & Fergus (2014).
+
+**Block 1 Features**
+![Block1](results/vgg16_finetune_block1_features.png)
+
+**Block 3 Features**
+![Block3](results/vgg16_finetune_block3_features.png)
+
+**Block 5 Features**
+![Block5](results/vgg16_finetune_block5_features.png)
+
+**Training History**
+![Fine-tuned VGG16 Training History](results/vgg16_finetune_history.png)
+
 ### Trained Model Files (Download Links)
 
 You can download the trained weights for each model from the links below:
@@ -137,15 +177,6 @@ You can download the trained weights for each model from the links below:
 - [Best Performing Model (`best_model.pth` from Model 3)](https://drive.google.com/file/d/1ePmaNHpcxm9itJoY_BKc7TwigLJGBXFl/view?usp=sharing)
 
 > Place the downloaded `.pth` files in the `results/` directory if you wish to reuse them for evaluation or visualization.
-
-## Data Augmentation
-
-The training data is augmented using:
-- Random resized crop (224x224)
-- Random horizontal flip
-- Random rotation (±10 degrees)
-- Color jittering (brightness, contrast, saturation)
-- Normalization (ImageNet stats)
 
 ## Interpretation & Results
 
