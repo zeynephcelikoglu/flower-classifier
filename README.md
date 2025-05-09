@@ -114,18 +114,20 @@ The training data is augmented using:
 - Training time: ~99 minutes
 
 #### Feature Visualization (Custom CNN)
+
 Visualizations are created using activation maps from selected convolutional layers to better understand what spatial patterns the model is focusing on, inspired by Zeiler & Fergus (2014).
 
-**Conv Layer 1 Features**
+**Conv Layer 1 Features (Sample)**  
 ![Conv1](results/custom_cnn_conv1_features.png)
 
-**Conv Layer 3 Features**
-![Conv3](results/custom_cnn_conv3_features.png)
+Only a representative sample is shown above.  
+Full visualizations for all selected layers are available in the `results/` directory:
 
-**Conv Layer 5 Features**
-![Conv5](results/custom_cnn_conv5_features.png)
+- [`custom_cnn_conv1_features.png`](results/custom_cnn_conv1_features.png)
+- [`custom_cnn_conv3_features.png`](results/custom_cnn_conv3_features.png)
+- [`custom_cnn_conv5_features.png`](results/custom_cnn_conv5_features.png)
 
-**Training History**
+**Training History**  
 ![Custom CNN Training History](results/custom_cnn_history.png)
 
 ### VGG16 Feature Extractor (Model 2)
@@ -153,18 +155,20 @@ Visualizations are created using activation maps from selected convolutional lay
 - Training time: ~151 minutes
 
 #### Feature Visualization (Fine-tuned VGG16)
+
 Visualizations are created using activation maps from selected convolutional layers to better understand what spatial patterns the model is focusing on, inspired by Zeiler & Fergus (2014).
 
-**Block 1 Features**
+**Block 1 Features (Sample)**  
 ![Block1](results/vgg16_finetune_block1_features.png)
 
-**Block 3 Features**
-![Block3](results/vgg16_finetune_block3_features.png)
+Only a representative sample is shown above.  
+Full visualizations for all selected blocks are available in the `results/` directory:
 
-**Block 5 Features**
-![Block5](results/vgg16_finetune_block5_features.png)
+- [`vgg16_finetune_block1_features.png`](results/vgg16_finetune_block1_features.png)
+- [`vgg16_finetune_block3_features.png`](results/vgg16_finetune_block3_features.png)
+- [`vgg16_finetune_block5_features.png`](results/vgg16_finetune_block5_features.png)
 
-**Training History**
+**Training History**  
 ![Fine-tuned VGG16 Training History](results/vgg16_finetune_history.png)
 
 ### Trained Model Files (Download Links)
